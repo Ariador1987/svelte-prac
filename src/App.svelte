@@ -1,13 +1,18 @@
 <script lang="ts">
     import svelteLogo from "./assets/svelte.svg";
-    import Counter from "./lib/Counter.svelte";
+    import TailwindCss from "./TailwindCSS.svelte";
 </script>
+
+<TailwindCss />
 
 <svelte:head>
     <title>hello</title>
 </svelte:head>
 
-<main>
+<main
+    class="inline-block bg-orange-300 hover:bg-orange-400 text-white font-bold font-heading py-6 px-8 rounded-md uppercase"
+    type="submit"
+>
     <div>
         <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
             <img src="/vite.svg" class="logo" alt="Vite Logo" />
@@ -18,8 +23,8 @@
     </div>
     <h1>Vite + <span class="random__text--primary">Svelte</span></h1>
 
-    <div class="card">
-        <Counter />
+    <div class="text-3xl capitalize rounded-md bg-gray-400 my-4">
+        hello i am some stuff here
     </div>
 
     <p>
