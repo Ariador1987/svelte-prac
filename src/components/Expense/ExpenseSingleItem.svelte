@@ -2,9 +2,8 @@
     import {getContext} from "svelte";
     import type ExpenseItem from "../../data/ExpenseItemModel";
     export let expenseItem: ExpenseItem;
-    import type State from "../../App.svelte";
     
-    const {removeExpense}: State = getContext("state");
+    const removeExpense: (id: number) => ExpenseItem[] = getContext("removeExpense");
 
     let {title, id, cost} = expenseItem;
     // privates

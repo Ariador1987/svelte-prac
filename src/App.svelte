@@ -9,30 +9,15 @@
 
     export let expensesItems: ExpenseItem[] = expenseItems;
 
-    interface State {
-        name: string;
-        removeExpense: (id: number) => ExpenseItem[];
-    }
-
-
     const removeExpense = (id: number): ExpenseItem[] => {
-        console.log("click")
-        console.log(expenseItems)
         return expensesItems = expensesItems.filter((item) => item.id !== id);
-    }
-
-    const state: State = {
-        name: "simple name",
-        removeExpense,
     }
 
     const calculateExpenses = (expensesArr: ExpenseItem[]): number => {
         return expensesArr.reduce((cache, currVal) => cache += currVal.cost ,0)
     }
 
-    
-
-    setContext("state", state);
+    setContext("removeExpense", removeExpense);
     export let total:number | undefined;
 
 </script>
