@@ -1,18 +1,21 @@
 <script lang="ts">
-    import type IExpenseItem from "../../data/ExpenseItemModel";
+    import type ExpenseItem from "../../data/ExpenseItemModel";
+
     import ExpenseSingleItem from "./ExpenseSingleItem.svelte";
-    export let expenseItems: IExpenseItem[];
+    export let expenseItems: ExpenseItem[];
+    export let calculateExpenses: (expenseArr: ExpenseItem[]) => number;
+    export let total: number;
+
+    
 
     // item totals
-    let total: string | Number = "No total";
-    if (expenseItems) {
-        total = expenseItems.reduce((acc, currVal) => acc += currVal.cost, 0)
-    }
+    $:total = calculateExpenses(expenseItems)
 </script>
+
 
 <ul class="flex flex-col items-center justify-center gap-4 mt-8 mb-16">
     {#each expenseItems as expense}
-       <ExpenseSingleItem expenseItem={expense}/>
+       <ExpenseSingleItem expenseItem={expense} />
     {/each}
 </ul>
 

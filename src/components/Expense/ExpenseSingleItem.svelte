@@ -1,11 +1,16 @@
 <script lang="ts">
+    import {getContext} from "svelte";
     import type ExpenseItem from "../../data/ExpenseItemModel";
     export let expenseItem: ExpenseItem;
+    import type State from "../../App.svelte";
+    
+    const {removeExpense}: State = getContext("state");
 
+    let {title, id, cost} = expenseItem;
     // privates
-    let isOpen: boolean = false;
+    let displayAmount: boolean = false;
     const handleClick = (e: MouseEvent) => {
-        isOpen = !isOpen;
+        displayAmount = !displayAmount;
     }
 </script>
 
@@ -14,32 +19,33 @@
 >
     <div class="">
         <div class="flex justify-between items-center">
-            <div class={`inline-flex ${isOpen && "mb-6"}`}>
+            <div class={`inline-flex ${displayAmount && "mb-6"}`}>
                 <h2
                     class="text-2xl capitalize mr-2 tracking-widest font-light"
                 >
-                    {expenseItem.title}
+                    {title}
                 </h2>
-                {#if isOpen}
-                    <button on:click={handleClick} type="button" class="cursor-pointer">
+                {#if displayAmount}
+                    <button on:click={handleClick} type="button" class="cursor-pointer amount-btn">
                         <i class="fa fa-caret-up" />
                     </button>
                 {:else}
-                    <button on:click={handleClick} type="button" class="cursor-pointer">
+                    <button on:click={handleClick} type="button" class="cursor-pointer amount-btn">
                         <i class="fa fa-caret-down" />
                     </button>
                 {/if}
             </div>
             <div class="space-x-2">
-                <i class="fa fa-pencil text-green-600 cursor-pointer" />
-                <i class="fa fa-trash text-red-600 cursor-pointer" />
+                <i class="fa fa-pencil text-green-600 cursor-pointer edit-btn" />
+                <!-- svelte-ignore a11y-click-events-have-key-events -->
+                <i class="fa fa-trash text-red-600 cursor-pointer delete-btn" on:click="{() => removeExpense(id)}"/>
             </div>
         </div>
 
-        {#if isOpen}
+        {#if displayAmount}
             <div class="text-lg font-normal" >
-                <p>Expense Id: {expenseItem.id}</p>
-                <p>Expense Cost: ${expenseItem.cost}</p>
+                <p>Expense Id: {id}</p>
+                <p>Expense Cost: ${cost}</p>
             </div>
         {/if}
     </div>
