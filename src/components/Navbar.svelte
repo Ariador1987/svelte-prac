@@ -1,5 +1,11 @@
 <script>
     import Title from "./Title.svelte";
+
+    export let isVisible = false;
+
+    const openOverlay = () => {
+        isVisible = true;
+    }
 </script>
 
 <nav
@@ -14,7 +20,7 @@
                 >Budget Calculator</span
             >
         </a>
-        <a href="#" class="flex items-center justify-center cursor-pointer group">
+        <a href="#" on:click="{openOverlay}" class="flex items-center justify-center cursor-pointer group">
             <i
                 class="fa fa-plus fa-2x text-slate-700 mr-4 transition group-hover:rotate-180"
             />
